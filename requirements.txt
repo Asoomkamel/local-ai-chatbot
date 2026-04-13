@@ -1,0 +1,12 @@
+streamlit
+requests
+fastapi
+pydantic
+langchain-core
+langchain-ollama
+langchain-community
+langchain-text-splitters
+chromadb
+pypdf
+uvicorn
+python-dotenv
