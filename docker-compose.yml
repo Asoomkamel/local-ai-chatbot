@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build: .
+    container_name: local-ai-chatbot
+    ports:
+      - "8501:8501"
+      - "8000:8000"
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./uploaded_docs:/app/uploaded_docs
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: chatbot-network

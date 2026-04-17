@@ -1,99 +1,119 @@
-# Local AI Chatbot with Dynamic RAG (Local-First Improvements)
+# 🤖 Local AI Chatbot with Dynamic RAG
 
-This project is an enhanced version of the `local-ai-chatbot`, incorporating dynamic document ingestion, persistent knowledge base management using ChromaDB, and improved source attribution, all designed for local execution without cloud dependencies.
+A professional, local-first AI chatbot implementation featuring **Retrieval-Augmented Generation (RAG)**. This project allows you to chat with various local LLMs and interact with your own documents (PDF/TXT) with full privacy, as all processing happens locally on your machine.
 
-## Features
+---
 
-*   **Interactive Chatbot Interface:** Built with Streamlit.
-*   **Dynamic Document Uploads:** Users can upload PDF and TXT files directly through the UI to expand the chatbot's knowledge base.
-*   **Persistent Knowledge Base:** Uses ChromaDB for efficient storage and retrieval of document embeddings.
-*   **Source Attribution:** Chatbot responses indicate the source document for retrieved information.
-*   **Configurable LLM Models:** Supports various local LLMs via Ollama.
-*   **Conversation History Management:** Maintains context-aware chat history.
-*   **Streaming Responses:** Provides a smooth, real-time conversational experience.
+## 🚀 Key Features
 
-## Prerequisites
+*   **Local-First Architecture**: Powered by **Ollama**, ensuring your data never leaves your machine.
+*   **Dynamic RAG**: Upload PDF or TXT files on-the-fly to expand the chatbot's knowledge base.
+*   **Persistent Knowledge Base**: Uses **ChromaDB** for efficient vector storage and retrieval.
+*   **Streaming Responses**: Real-time message streaming for a smooth user experience.
+*   **Multi-Model Support**: Easily switch between models like `Llama 3.2`, `DeepSeek-R1`, and more.
+*   **Professional UI**: A clean, responsive interface built with **Streamlit**.
+*   **FastAPI Backend**: Robust and scalable API handling the RAG logic and streaming.
+*   **Docker Ready**: Fully containerized for easy deployment and environment consistency.
 
-Before running the application, you need to have the following installed:
+---
 
-*   **Python 3.9+**
-*   **Ollama:** A local LLM server. Download and install it from [ollama.com](https://ollama.com/download).
+## 🛠 Technology Stack
 
-## Setup and Installation
+| Component | Technology |
+| :--- | :--- |
+| **Frontend** | [Streamlit](https://streamlit.io/) |
+| **Backend API** | [FastAPI](https://fastapi.tiangolo.com/) |
+| **LLM Orchestration** | [LangChain](https://www.langchain.com/) |
+| **Vector Database** | [ChromaDB](https://www.trychroma.com/) |
+| **Local LLM Engine** | [Ollama](https://ollama.com/) |
+| **Embeddings** | `nomic-embed-text` (via Ollama) |
 
-1.  **Clone the repository (or extract the provided files):**
-    ```bash
-    # If you have it as a git repo
-    git clone <your-repo-url>
-    cd local-ai-chatbot
-    # If you extracted the rar file, navigate to the directory
-    cd /home/ubuntu/local-ai-chatbot/local-ai-chatbot
-    ```
+---
 
-2.  **Install Python dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *(Note: A `requirements.txt` file will be created in the next step if it doesn't exist.)*
+## 🧠 Supported Local Models
 
-3.  **Download Ollama Models:**
-    You need to download the `llama3.2` and `nomic-embed-text` models using Ollama. Open your terminal and run:
-    ```bash
-    ollama pull llama3.2
-    ollama pull nomic-embed-text
-    ```
-    Ensure the Ollama server is running in the background.
+This chatbot is designed to work seamlessly with any model supported by **Ollama**. By default, it is configured for:
+*   **Llama 3.2**: Meta's latest efficient model.
+*   **DeepSeek-R1**: High-performance reasoning model (1.5b, 7b, etc.).
+*   **Mistral / Gemma**: Easily add these to `config.py`.
 
-4.  **Initial Knowledge Base Ingestion:**
-    The project includes a `sample.pdf`. You need to ingest this into the ChromaDB vector store. Run the `rag.py` script:
-    ```bash
-    python3 rag.py
-    ```
-    This will create a `./chroma_db` directory with your persistent knowledge base.
+> **Note**: Ensure you have pulled the models locally using `ollama pull <model_name>`.
 
-## Running the Application
+---
 
-1.  **Start the FastAPI Backend:**
-    Open a new terminal window, navigate to the `local-ai-chatbot` directory, and run:
-    ```bash
-    python3 api.py
-    ```
-    You should see output indicating the FastAPI server is starting on `http://127.0.0.1:8000`.
+## 🐳 Docker Setup (Recommended)
 
-2.  **Start the Streamlit Frontend:**
-    Open another new terminal window, navigate to the `local-ai-chatbot` directory, and run:
-    ```bash
-    streamlit run app.py
-    ```
-    This will open the Streamlit application in your web browser, typically at `http://localhost:8501`.
+The easiest way to run the chatbot is using Docker Compose.
 
-## Usage
+### 1. Prerequisites
+*   [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed.
+*   [Ollama](https://ollama.com/) running on your host machine.
 
-*   Interact with the chatbot in the main chat window.
-*   Use the sidebar to select an LLM model or clear the chat history.
-*   **Upload Documents:** In the sidebar, use the "Upload a document (PDF/TXT)" section to add new files to the chatbot's knowledge base. After uploading, click "Add to Knowledge Base" to process and ingest the document.
-
-## Project Structure
-
+### 2. Run with Docker Compose
+```bash
+docker-compose up --build
 ```
-local-ai-chatbot/
-├── api.py          # FastAPI backend for LLM inference and document ingestion
-├── app.py          # Streamlit frontend for user interaction
-├── config.py       # Configuration for models and history
-├── llm.py          # LLM chain definition and RAG integration
-├── memory.py       # Chat history management
-├── rag.py          # Document loading, chunking, embedding, and ChromaDB management
-├── sample.pdf      # Example document for initial knowledge base
-├── chroma_db/      # Persistent ChromaDB vector store (created after running rag.py)
-└── uploaded_docs/  # Directory for dynamically uploaded documents
+*   **Frontend**: [http://localhost:8501](http://localhost:8501)
+*   **Backend API**: [http://localhost:8000](http://localhost:8000)
+
+---
+
+## 💻 Manual Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Asoomkamel/local-ai-chatbot.git
+cd local-ai-chatbot
 ```
 
-## Future Enhancements (Cloud-Ready Considerations)
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-While this version focuses on local execution, here are considerations for future cloud deployment:
+### 3. Setup Ollama
+Ensure Ollama is running and pull the required models:
+```bash
+ollama pull llama3.2
+ollama pull deepseek-r1:1.5b
+ollama pull nomic-embed-text
+```
 
-*   **Containerization:** Use Docker and Docker Compose for easier deployment to cloud platforms.
-*   **Scalable Vector Database:** Migrate ChromaDB to a managed service like Pinecone, Weaviate, or Qdrant for production-grade scalability and reliability.
-*   **Managed LLM Services:** Integrate with cloud-based LLM APIs (e.g., OpenAI, Google Gemini) or deploy self-hosted models on scalable inference infrastructure (e.g., Kubernetes with vLLM).
-*   **Authentication & Authorization:** Implement robust user management and API security for multi-user environments.
-*   **Asynchronous Task Queues:** Utilize cloud-native message queues (e.g., AWS SQS, Google Cloud Pub/Sub) for background document processing.
+### 4. Run the Application
+Start the Backend:
+```bash
+python api.py
+```
+Start the Frontend (in a new terminal):
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📂 Project Structure
+```text
+.
+├── app.py              # Streamlit Frontend
+├── api.py              # FastAPI Backend
+├── llm.py              # LangChain & LLM Logic
+├── rag.py              # RAG & Vector DB Management
+├── config.py           # Model & App Configuration
+├── memory.py           # Chat History Management
+├── chroma_db/          # Persistent Vector Store (Generated)
+├── uploaded_docs/      # Uploaded Documents (Generated)
+├── Dockerfile          # Docker Configuration
+└── docker-compose.yml  # Docker Compose Configuration
+```
+
+---
+
+## 👨‍💻 Developer
+**Eng Mutasim Alkamil**
+*   [GitHub](https://github.com/Asoomkamel)
+*   [LinkedIn](https://www.linkedin.com/in/mutasim-al-kamil-40a299318)
+
+---
+
+## 📄 License
+This project is open-source and available under the MIT License.

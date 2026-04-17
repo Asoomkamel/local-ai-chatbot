@@ -117,8 +117,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-API_URL = "http://127.0.0.1:8000/chat"
-UPLOAD_URL = "http://127.0.0.1:8000/upload-document"
+import os
+BACKEND_HOST = os.getenv("BACKEND_HOST", "127.0.0.1")
+API_URL = f"http://{BACKEND_HOST}:8000/chat"
+UPLOAD_URL = f"http://{BACKEND_HOST}:8000/upload-document"
 
 # ---- UI Setup ---- #
 st.title("🤖 Local AI Chatbot")
