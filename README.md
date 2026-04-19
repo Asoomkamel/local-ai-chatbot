@@ -4,6 +4,15 @@ A professional, local-first AI chatbot implementation featuring **Retrieval-Augm
 
 ---
 
+## 📸 User Interface
+
+<div align="center">
+<img src="./media/screenshots/chatbot_ui.webp" alt="Local AI Chatbot UI" width="100%"/>
+<p><i>The clean and intuitive Streamlit-based interface for local AI interaction.</i></p>
+</div>
+
+---
+
 ## 🚀 Key Features
 
 *   **Local-First Architecture**: Powered by **Ollama**, ensuring your data never leaves your machine.
@@ -115,3 +124,5 @@ streamlit run app.py
 
 ---
 
+## 📄 License
+This project is open-source and available under the MIT License.
